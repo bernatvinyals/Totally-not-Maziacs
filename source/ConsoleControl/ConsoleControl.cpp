@@ -38,7 +38,22 @@ void ConsoleClearCharacter(char character, ConsoleColor ForeColor, ConsoleColor 
 void ConsoleWait(unsigned long milisecons){
 	Sleep(milisecons);
 }
-
+void ChangeTextFontSize(int sizeX, int sizeY) {
+	CONSOLE_FONT_INFOEX cfi = { sizeof(cfi) };
+	GetCurrentConsoleFontEx(StdHandle, FALSE, &cfi);
+	// Modify the font size in cfi
+	cfi.dwFontSize.X = sizeX;
+	cfi.dwFontSize.Y = sizeY;
+	SetCurrentConsoleFontEx(StdHandle, FALSE, &cfi);
+}
+void ConsoleWindowSize(int xSize, int ySize) {
+	_SMALL_RECT rect = { sizeof(rect) };
+	rect.Right = xSize;
+	rect.Bottom = ySize;
+	rect.Top = 0;
+	rect.Left = 0;
+	SetConsoleWindowInfo(StdHandle, TRUE, &rect);
+}
 int ConsoleInKey(){
 	int KB_code = 0;
 

@@ -1,61 +1,63 @@
+#include "Mapa.h"
+#include "Player.h"
+#include "Goal.h"
+#include "Food.h"
+#include "Weapon.h"
 #include <iostream>
-#include <vector>
 #include <stdlib.h>
 #include <time.h>
+#include <vector>
 #include "ConsoleControl/ConsoleControl.h"
-#include "Jugador.h"
-#include "Arbre.h"
+#include "interface.h"
 
-int tecla;
 
-void initBosc(std::vector <Arbre> *punter);
-void renderBosc(std::vector <Arbre> *punter);
-
+int key;
 int main() {
-	//Init
 	srand(time(NULL));
-	std::vector <Arbre> Bosc;
-
-	Jugador Jan;
-	Jan.init();
-	Jan.setBosc(&Bosc);
-	initBosc(&Bosc);
-
-	while (tecla != KB_ESCAPE)
+	Mapa map;
+	Player player;
+	Goal goal;
+	std::vector <Enemy> objs_enemy;
+	std::vector <Food> objs_food;
+	std::vector <Weapon> objs_weapons;
+	bool menuOn = false;
+	bool hasWin = false;
+	ConsoleWindowSize(92, 69);
+	ChangeTextFontSize(8, 8);
+	while (key != KB_ESCAPE)
 	{
-		//Input
-		tecla = ConsoleInKey();
-
-		//Update
-		Jan.update();
-
-		//Render
-		renderBosc(&Bosc);
-		Jan.render();
-
-		ConsoleWait(45);
-		ConsoleClear();
+		key = ConsoleInKey();
+		if (!menuOn)
+		{
+			menuOn = menu();
+		}
+		switch (key)
+		{
+		case KB_1:
+			hasWin = sceneGame(&player, &goal, &map, &objs_enemy, &objs_food, &objs_weapons);
+			ConsoleClear();
+			if (hasWin)
+			{
+				gameWin();
+			}
+			else
+			{
+				gameOver();
+			}
+			ConsoleClear();
+			menuOn = false;
+			key = 0;
+			break;
+		case KB_2:
+			ConsoleClear();
+			menuOn = false;
+			break;
+		case KB_3://TODO: SCOREBOARD
+			key = KB_ESCAPE;
+			break;
+		default:
+			break;
+		}
 	}
-
 	return 0;
-}
-
-void initBosc(std::vector <Arbre> *punter)
-{
-	punter->resize(40 + rand() % 40);
-	for (int i = 0; i < punter->size(); i++)
-	{
-		int rndX = rand() % 80;
-		int rndY = rand() % 24;
-		punter->at(i).setX(rndX);
-		punter->at(i).setY(rndY);
-	}
-}
-
-void renderBosc(std::vector <Arbre> *punter)
-{
-	for (int i = 0; i < punter->size(); i++)
-	{
-		punter->at(i).render();
-	}
 }

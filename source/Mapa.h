@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <iostream>
-#define SIZE 16
+#define SIZE 18
 struct Pos {
 	int X;
 	int Y;
