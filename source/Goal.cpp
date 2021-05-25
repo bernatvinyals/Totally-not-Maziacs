@@ -49,7 +49,7 @@ void Goal::genPos()
 	int roundstoPosition = rand() % ((SIZE * 3));
 	if (roundstoPosition <= 10)
 	{
-		roundstoPosition + 20;
+		roundstoPosition += 20;
 	}
 	for (int i = 0; i < roundstoPosition; i++)
 	{

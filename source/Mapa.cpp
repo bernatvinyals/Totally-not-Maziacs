@@ -212,7 +212,7 @@ int Mapa::getRandomDirection()
 			reset = false;
 		}
 	} while (reset);
-	return (std::pow(2, tempN));//0=1  1=2  2=4  3=8
+	return (int)(std::pow(2, tempN));//0=1  1=2  2=4  3=8
 }
 
 Mapa::Mapa()

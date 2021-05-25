@@ -8,11 +8,11 @@ void Food::genPos()
 	int roundstoPositiony = rand() % ((SIZE * 3));
 	if (roundstoPosition <= 3)
 	{
-		roundstoPosition + 5;
+		roundstoPosition += 5;
 	}
 	if (roundstoPositiony <= 10)
 	{
-		roundstoPositiony + 10;
+		roundstoPositiony += 10;
 	}
 	for (int i = 0; i < roundstoPositiony; i++)
 	{

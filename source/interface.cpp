@@ -5,8 +5,10 @@
 #include "Enemy.h"
 #include "Weapon.h"
 #include "ConsoleControl/ConsoleControl.h"
+#include "fileRWandC.h"
 #include <iostream>
 #include <vector>
+#include <string>
 extern int key;
 bool menu() {
 	ConsoleSetColor(CYAN, BLACK);
@@ -46,7 +48,7 @@ void gameOver() {
 	std::cout << "            $$$$$$\\   $$$$$$\\  $$\\      $$\\ $$$$$$$$\\  \n";
 	std::cout << "           $$  __$$\\ $$  __$$\\ $$$\\    $$$ |$$  _____|   \n";
 	std::cout << "           $$ /  \\__|$$ /  $$ |$$$$\\  $$$$ |$$ |          \n";
-	std::cout << "           $$ |$$$$\\ $$$$$$$$ |$$\\$$\$$ $$ |$$$$$\\       \n";
+	std::cout << "           $$ |$$$$\\ $$$$$$$$ |$$\\$$\\$$ $$ |$$$$$\\       \n";
 	std::cout << "           $$ |\\_$$ |$$  __$$ |$$ \\$$$  $$ |$$  __|       \n";
 	std::cout << "           $$ |  $$ |$$ |  $$ |$$ |\\$  /$$ |$$ |           \n";
 	std::cout << "           \\$$$$$$  |$$ |  $$ |$$ | \\_/ $$ |$$$$$$$$\\    \n";
@@ -86,7 +88,7 @@ void gameWin() {
 	std::cout << "              \\$$  /   $$ |  $$ |$$ |  $$ |      \n";
 	std::cout << "               $$ |    $$ |  $$ |$$ |  $$ |      \n";
 	std::cout << "               $$ |     $$$$$$  |\\$$$$$$  |      \n";
-	std::cout << "               \\__|     \______/  \______/       \n";
+	std::cout << "               \\__|     \\______/  \\______/       \n";
 	std::cout << "            $$\\      $$\\ $$$$$$\\ $$\\   $$\\ $$\\    \n";
 	std::cout << "            $$ | $\\  $$ |\\_$$  _|$$$\\  $$ |$$ |   \n";
 	std::cout << "            $$ |$$$\\ $$ |  $$ |  $$$$\\ $$ |$$ |   \n";
@@ -124,6 +126,7 @@ void gameUI(int hp, int score, int food, int weaponCount) {
 	ConsoleXY(0, SIZE*3);
 	std::cout << "Health: " << hp << " Food: "<< food << " Weapons: " << weaponCount << " Score: "<<score;
 }
+
 bool sceneGame(Player *player, Goal *goal, Mapa *map, std::vector <Enemy> *objs_enemy, std::vector <Food> *objs_food, std::vector <Weapon> *objs_weapons) {
 	ConsoleSetColor(WHITE, BLACK);
 	ConsoleXY(0, 0);
@@ -142,11 +145,12 @@ bool sceneGame(Player *player, Goal *goal, Mapa *map, std::vector <Enemy> *objs_
 	{
 		objs_weapons->clear();
 	}
+	objs_enemy->resize(SIZE);
+	objs_food->resize(SIZE);
+	objs_weapons->resize(SIZE);
+
 	for (int i = 0; i < SIZE; i++)
 	{
-		objs_enemy->push_back(*new Enemy());
-		objs_food->push_back(*new Food());
-		objs_weapons->push_back(*new Weapon());
 		objs_enemy->at(i).init(map, objs_enemy, i);
 		objs_food->at(i).init(map, goal, player, i);
 		objs_weapons->at(i).init(map, goal, player, i);
@@ -162,7 +166,7 @@ bool sceneGame(Player *player, Goal *goal, Mapa *map, std::vector <Enemy> *objs_
 
 		//UPDATE
 		ConsoleSetColor(BLACK, BLACK);
-		for (int i = 0; i < objs_enemy->size(); i++)
+		for (unsigned int i = 0; i < objs_enemy->size(); i++)
 		{
 			objs_enemy->at(i).update();
 			objs_food->at(i).update();
@@ -171,7 +175,7 @@ bool sceneGame(Player *player, Goal *goal, Mapa *map, std::vector <Enemy> *objs_
 		player->update();
 		goal->update();
 		//RENDER
-		for (int i = 0; i < objs_enemy->size(); i++)
+		for (unsigned int i = 0; i < objs_enemy->size(); i++)
 		{
 			objs_enemy->at(i).render();
 			objs_food->at(i).render();
@@ -187,7 +191,6 @@ bool sceneGame(Player *player, Goal *goal, Mapa *map, std::vector <Enemy> *objs_
 		if (goal->hasWin())
 		{
 			onGame = false;
-			return true;
 		}
 		if (player->isDead())
 		{
@@ -195,5 +198,29 @@ bool sceneGame(Player *player, Goal *goal, Mapa *map, std::vector <Enemy> *objs_
 		}
 		ConsoleWait(25);
 	}
+
+	std::string input;
+	ConsoleXY(SIZE * 3 / 2 -1, SIZE * 3 / 2);
+	ConsoleSetColor(WHITE, BLUE);
+	std::cout << " ";
+	ConsoleXY(SIZE * 3 / 2, SIZE * 3 / 2);
+	std::cout << "Write your name: ";
+	for (int i = -1; i < 17; i++)
+	{
+		ConsoleXY((SIZE * 3 / 2) + i, (SIZE * 3 / 2) - 1);
+		std::cout << " ";
+		ConsoleXY((SIZE*3 / 2)+i, (SIZE * 3 / 2) + 1);
+		std::cout << " ";
+		ConsoleXY((SIZE * 3 / 2) + i, (SIZE * 3 / 2) + 2);
+		std::cout << " ";
+	}
+	ConsoleXY(SIZE * 3 / 2, (SIZE * 3 / 2) +1);
+	std::getline(std::cin, input);
+	writeScore(player, &input);
+	if (goal->hasWin())
+	{
+		return true;
+	}
+
 	return false;
 }

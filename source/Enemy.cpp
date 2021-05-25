@@ -9,11 +9,11 @@ void Enemy::genPos()
 	int roundstoPositiony = rand() % ((SIZE * 3));
 	if (roundstoPosition <= 10)
 	{
-		roundstoPosition + 10;
+		roundstoPosition += 10;
 	}
 	if (roundstoPositiony <= 10)
 	{
-		roundstoPositiony + 10;
+		roundstoPositiony += 10;
 	}
 	for (int i = 0; i < roundstoPositiony; i++)
 	{
@@ -138,7 +138,7 @@ void Enemy::setCollisionMap(Mapa* objMap)
 
 bool Enemy::isOverlaping()
 {
-	for (int i = 0; i < _objs_enemies->size(); i++)
+	for (unsigned int i = 0; i < _objs_enemies->size(); i++)
 	{
 		if (_objs_enemies->at(i).getX() == _position.X && _objs_enemies->at(i).getY() == _position.Y && _objs_enemies->at(i).getId() != _id)
 		{

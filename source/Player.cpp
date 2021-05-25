@@ -107,7 +107,7 @@ void Player::hitPlayer()
 
 bool Player::isOverlaping()
 {
-	for (int i = 0; i < _vect_objs_enemy->size(); i++)
+	for (unsigned int i = 0; i < _vect_objs_enemy->size(); i++)
 	{
 		if (_vect_objs_enemy->at(i).getX() == _submX && _vect_objs_enemy->at(i).getY() == _submY)
 		{

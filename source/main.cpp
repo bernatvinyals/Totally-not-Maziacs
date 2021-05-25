@@ -13,7 +13,7 @@
 
 int key;
 int main() {
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	Mapa map;
 	Player player;
 	Goal goal;
