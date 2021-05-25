@@ -1,0 +1,6 @@
+0;004F6D94
+0;005B6F98
+0;bern
+0;Berni
+10;bern
+0;OKE
