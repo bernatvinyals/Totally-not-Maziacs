@@ -1,6 +1,12 @@
-0;004F6D94
-0;005B6F98
-0;bern
-0;Berni
-10;bern
-0;OKE
+10;name1
+20;name2
+30;name3
+110;name4
+110;name5
+40;name6
+510;name8
+610;name7
+10;name10
+710;name9
+
+0;my name

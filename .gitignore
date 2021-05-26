@@ -30,3 +30,16 @@
 *.exe
 *.out
 *.app
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+*.ipch
+*.tlog
+*.log
+*.recipe
+*.ilk
+*.pdb
+*.txt
+*.idb
+source/.vs/Totally Not Maziacs/v16/.suo

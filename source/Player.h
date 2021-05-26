@@ -34,7 +34,7 @@ public:
 	void setY(int value) { _position.Y = value; }
 	void addScore() { _score += 10; }
 	void addWeapon() { _weaponCount += 1; }
-	void addFood() { _food += 1; }
+	void addFood();
 	void setCollisionMap(Mapa* objMap);
 
 	void hitPlayer();

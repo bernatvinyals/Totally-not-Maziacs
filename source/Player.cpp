@@ -84,6 +84,18 @@ void Player::render()
 	std::cout << "0";
 }
 
+void Player::addFood()
+{
+	if (_hp < 3)
+	{
+		_hp++;
+	}
+	else
+	{
+		_food += 1;
+	}
+}
+
 void Player::setCollisionMap(Mapa* objMap)
 {
 	objMap->getMap(_collision);

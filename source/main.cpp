@@ -22,7 +22,7 @@ int main() {
 	std::vector <Weapon> objs_weapons;
 	bool menuOn = false;
 	bool hasWin = false;
-	ConsoleWindowSize(92, 69);
+	ConsoleWindowSize(102, 69);
 	ChangeTextFontSize(8, 8);
 	while (key != KB_ESCAPE)
 	{
@@ -49,6 +49,8 @@ int main() {
 			key = 0;
 			break;
 		case KB_2:
+			ConsoleClear();
+			sceneScoreboard();
 			ConsoleClear();
 			menuOn = false;
 			break;
