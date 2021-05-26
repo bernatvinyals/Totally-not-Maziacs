@@ -1,13 +1,10 @@
 #pragma once
+#include "Entity.h"
 #include "Mapa.h"
 #include "Player.h"
 #include "Goal.h"
-class Food
+class Food :public Entity
 {
-	int _id;
-	bool _isActive;
-	Pos _position;
-	int _collision[SIZE * 3][SIZE * 3];
 	Player* _obj_player;
 	Goal* _obj_Goal;
 
@@ -20,11 +17,6 @@ public:
 	void update();
 	void render();
 
-	int getId() { return _id; }
-	int getX() { return _position.X; }
-	int getY() { return _position.Y; }
-	void deactivate();
-	void setCollisionMap(Mapa* objMap);
 	bool isOverlaping();
 };
 

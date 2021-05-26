@@ -2,7 +2,7 @@
 #include "Food.h"
 #include "Weapon.h"
 void gameUI(int hp, int score, int food, int weaponCount);
-bool menu();
+bool menu(bool readFailed);
 void gameWin();
 void gameOver();
 bool sceneScoreboard();

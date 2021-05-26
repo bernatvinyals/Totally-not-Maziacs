@@ -1,12 +1,9 @@
 #pragma once
 #include "Mapa.h"
+#include "Entity.h"
 #include <vector>
-class Enemy
+class Enemy:public Entity
 {
-	bool _isActive;
-	int _id;
-	Pos _position;
-	int _collision[SIZE * 3][SIZE * 3];
 	std::vector <Enemy> *_objs_enemies;
 
 	int _submX;
@@ -22,11 +19,6 @@ public:
 	void update();
 	void render();
 
-	int getId() { return _id; }
-	int getX() { return _position.X; }
-	int getY() { return _position.Y; }
-	void deactivate();
-	void setCollisionMap(Mapa* objMap);
 	bool isOverlaping();
 };
 

@@ -73,8 +73,3 @@ bool Goal::isPlayerTouching()
 	}
 	return false;
 }
-
-void Goal::setCollisionMap(Mapa* objMap)
-{
-	objMap->getMap(_collision);
-}

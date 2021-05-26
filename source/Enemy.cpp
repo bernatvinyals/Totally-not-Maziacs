@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "Entity.h"
 #include <time.h>
 #include <stdlib.h>
 #include "ConsoleControl/ConsoleControl.h"
@@ -122,18 +123,6 @@ void Enemy::render()
 		ConsoleSetColor(DARKRED, RED);
 		std::cout << "!";
 	}
-}
-
-void Enemy::deactivate()
-{
-	_isActive = false;
-	ConsoleSetColor(BLACK, BLACK);
-	ConsoleXY(_position.X, _position.Y);
-}
-
-void Enemy::setCollisionMap(Mapa* objMap)
-{
-	objMap->getMap(_collision);
 }
 
 bool Enemy::isOverlaping()

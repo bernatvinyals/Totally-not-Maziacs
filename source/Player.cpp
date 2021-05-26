@@ -96,10 +96,6 @@ void Player::addFood()
 	}
 }
 
-void Player::setCollisionMap(Mapa* objMap)
-{
-	objMap->getMap(_collision);
-}
 
 void Player::hitPlayer()
 {

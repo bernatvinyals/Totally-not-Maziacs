@@ -7,7 +7,7 @@ HANDLE StdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 void ConsoleSetColor(ConsoleColor ForeColor, ConsoleColor BackColor){
 	WORD color = (BackColor << 4) | ForeColor;
-	SetConsoleTextAttribute(StdHandle, color);
+	SetConsoleTextAttribute(StdHandle, color);	
 }
 
 void ConsoleXY(short int x, short int y){
@@ -53,6 +53,12 @@ void ConsoleWindowSize(int xSize, int ySize) {
 	rect.Top = 0;
 	rect.Left = 0;
 	SetConsoleWindowInfo(StdHandle, TRUE, &rect);
+}
+void HideConsoleCursor() {
+	_CONSOLE_CURSOR_INFO cci = { sizeof(cci) };
+	cci.dwSize = 1;
+	cci.bVisible = false;
+	SetConsoleCursorInfo(StdHandle, &cci);
 }
 int ConsoleInKey(){
 	int KB_code = 0;

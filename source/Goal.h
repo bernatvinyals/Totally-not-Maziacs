@@ -1,10 +1,9 @@
 #pragma once
+#include "Entity.h"
 #include "Mapa.h"
 #include "Player.h"
-class Goal
+class Goal :public Entity
 {
-	Pos _position;
-	int _collision[SIZE * 3][SIZE * 3];
 	bool _goalIsHit;
 	Player* _objPlayer;
 	void genPos();
@@ -15,9 +14,6 @@ public:
 	void init(Mapa* objMap, Player *_ptrPlayer);
 	void update();
 	void render();
-	void setCollisionMap(Mapa* objMap);
 	bool hasWin() { return _goalIsHit; };
-	int getX() { return _position.X; }
-	int getY() { return _position.Y; }
 };
 

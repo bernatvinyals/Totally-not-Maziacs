@@ -22,14 +22,18 @@ int main() {
 	std::vector <Weapon> objs_weapons;
 	bool menuOn = false;
 	bool hasWin = false;
+	bool readFailed = false;
 	ConsoleWindowSize(102, 69);
 	ChangeTextFontSize(8, 8);
+	HideConsoleCursor();
 	while (key != KB_ESCAPE)
 	{
+		ConsoleWindowSize(102, 69);
+		ChangeTextFontSize(8, 8);
 		key = ConsoleInKey();
 		if (!menuOn)
 		{
-			menuOn = menu();
+			menuOn = menu(readFailed);
 		}
 		switch (key)
 		{
@@ -39,10 +43,12 @@ int main() {
 			if (hasWin)
 			{
 				gameWin();
+				readFailed = false;
 			}
 			else
 			{
 				gameOver();
+				readFailed = false;
 			}
 			ConsoleClear();
 			menuOn = false;
@@ -50,7 +56,7 @@ int main() {
 			break;
 		case KB_2:
 			ConsoleClear();
-			sceneScoreboard();
+			readFailed = sceneScoreboard();
 			ConsoleClear();
 			menuOn = false;
 			break;

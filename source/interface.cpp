@@ -10,7 +10,7 @@
 #include <vector>
 #include <string>
 extern int key;
-bool menu() {
+bool menu(bool readFailed) {
 	ConsoleSetColor(CYAN, BLACK);
 	std::cout << "\n\n    $$$$$$$$\\         $$\\               $$\\ $$\\                 $$\\   $$\\  $$$$$$\\ $$$$$$$$\\ \n";
 	std::cout << "    \\__$$  __|        $$ |              $$ |$$ |                $$$\\  $$ |$$  __$$\\\\__$$  __|  \n";
@@ -33,6 +33,12 @@ bool menu() {
 	std::cout << "               $$ | \\_/ $$ |\\$$$$$$$ |$$$$$$$$\\ $$ |\\$$$$$$$ |\\$$$$$$$\\ $$$$$$$  | \n";
 	std::cout << "               \\__|     \\__| \\_______|\\________|\\__| \\_______| \\_______|\\_______/ \n";
 	ConsoleSetColor(WHITE, BLACK);
+
+	if (readFailed)
+	{
+		ConsoleXY(((SIZE * 3) / 2), (SIZE * 3)-10);
+		std::cout << "Play some games to see the scoreboard";
+	}
 	ConsoleXY((SIZE*3)/2, SIZE * 3);
 	std::cout << "(1) To Start.";
 	ConsoleXY((SIZE * 3) / 2, SIZE * 3 + 1);
@@ -45,22 +51,22 @@ bool menu() {
 void gameOver() {
 	ConsoleSetColor(RED, BLACK);
 	ConsoleXY(0, 4);
-	std::cout << "            $$$$$$\\   $$$$$$\\  $$\\      $$\\ $$$$$$$$\\  \n";
-	std::cout << "           $$  __$$\\ $$  __$$\\ $$$\\    $$$ |$$  _____|   \n";
-	std::cout << "           $$ /  \\__|$$ /  $$ |$$$$\\  $$$$ |$$ |          \n";
-	std::cout << "           $$ |$$$$\\ $$$$$$$$ |$$\\$$\\$$ $$ |$$$$$\\       \n";
-	std::cout << "           $$ |\\_$$ |$$  __$$ |$$ \\$$$  $$ |$$  __|       \n";
-	std::cout << "           $$ |  $$ |$$ |  $$ |$$ |\\$  /$$ |$$ |           \n";
-	std::cout << "           \\$$$$$$  |$$ |  $$ |$$ | \\_/ $$ |$$$$$$$$\\    \n";
-	std::cout << "            \\______/ \\__|  \\__|\\__|     \\__|\\________|\n";
-	std::cout << "             $$$$$$\\  $$\\    $$\\ $$$$$$$$\\ $$$$$$$\\  \n";
-	std::cout << "            $$  __$$\\ $$ |   $$ |$$  _____|$$  __$$\\ \n";
-	std::cout << "            $$ /  $$ |$$ |   $$ |$$ |      $$ |  $$ |\n";
-	std::cout << "            $$ |  $$ |\\$$\\  $$  |$$$$$\\    $$$$$$$  |\n";
-	std::cout << "            $$ |  $$ | \\$$\\$$  / $$  __|   $$  __$$< \n";
-	std::cout << "            $$ |  $$ |  \\$$$  /  $$ |      $$ |  $$ |\n";
-	std::cout << "             $$$$$$  |   \\$  /   $$$$$$$$\\ $$ |  $$ |\n";
-	std::cout << "             \\______/     \\_/    \\________|\\__|  \\__|\n";
+	std::cout << "                          $$$$$$\\   $$$$$$\\  $$\\      $$\\ $$$$$$$$\\  \n";
+	std::cout << "                         $$  __$$\\ $$  __$$\\ $$$\\    $$$ |$$  _____|   \n";
+	std::cout << "                         $$ /  \\__|$$ /  $$ |$$$$\\  $$$$ |$$ |          \n";
+	std::cout << "                         $$ |$$$$\\ $$$$$$$$ |$$\\$$\\$$ $$ |$$$$$\\       \n";
+	std::cout << "                         $$ |\\_$$ |$$  __$$ |$$ \\$$$  $$ |$$  __|       \n";
+	std::cout << "                         $$ |  $$ |$$ |  $$ |$$ |\\$  /$$ |$$ |           \n";
+	std::cout << "                         \\$$$$$$  |$$ |  $$ |$$ | \\_/ $$ |$$$$$$$$\\    \n";
+	std::cout << "                          \\______/ \\__|  \\__|\\__|     \\__|\\________|\n";
+	std::cout << "                           $$$$$$\\  $$\\    $$\\ $$$$$$$$\\ $$$$$$$\\  \n";
+	std::cout << "                          $$  __$$\\ $$ |   $$ |$$  _____|$$  __$$\\ \n";
+	std::cout << "                          $$ /  $$ |$$ |   $$ |$$ |      $$ |  $$ |\n";
+	std::cout << "                          $$ |  $$ |\\$$\\  $$  |$$$$$\\    $$$$$$$  |\n";
+	std::cout << "                          $$ |  $$ | \\$$\\$$  / $$  __|   $$  __$$< \n";
+	std::cout << "                          $$ |  $$ |  \\$$$  /  $$ |      $$ |  $$ |\n";
+	std::cout << "                           $$$$$$  |   \\$  /   $$$$$$$$\\ $$ |  $$ |\n";
+	std::cout << "                           \\______/     \\_/    \\________|\\__|  \\__|\n";
 	ConsoleSetColor(WHITE, BLACK);
 	ConsoleXY((SIZE * 3) / 2, SIZE * 3);
 	std::cout << "(1) To Return.";
@@ -81,22 +87,22 @@ void gameOver() {
 void gameWin() {
 	ConsoleSetColor(GREEN, BLACK);
 	ConsoleXY(0, 4);
-	std::cout << "           $$\\     $$\\  $$$$$$\\  $$\\   $$\\       \n";
-	std::cout << "           \\$$\\   $$  |$$  __$$\\ $$ |  $$ |      \n";
-	std::cout << "            \\$$\\ $$  / $$ /  $$ |$$ |  $$ |      \n";
-	std::cout << "             \\$$$$  /  $$ |  $$ |$$ |  $$ |      \n";
-	std::cout << "              \\$$  /   $$ |  $$ |$$ |  $$ |      \n";
-	std::cout << "               $$ |    $$ |  $$ |$$ |  $$ |      \n";
-	std::cout << "               $$ |     $$$$$$  |\\$$$$$$  |      \n";
-	std::cout << "               \\__|     \\______/  \\______/       \n";
-	std::cout << "            $$\\      $$\\ $$$$$$\\ $$\\   $$\\ $$\\    \n";
-	std::cout << "            $$ | $\\  $$ |\\_$$  _|$$$\\  $$ |$$ |   \n";
-	std::cout << "            $$ |$$$\\ $$ |  $$ |  $$$$\\ $$ |$$ |   \n";
-	std::cout << "            $$ $$ $$\\$$ |  $$ |  $$ $$\\$$ |$$ |   \n";
-	std::cout << "            $$$$  _$$$$ |  $$ |  $$ \\$$$$ |\\__|   \n";
-	std::cout << "            $$$  / \\$$$ |  $$ |  $$ |\\$$$ |       \n";
-	std::cout << "            $$  /   \\$$ |$$$$$$\\ $$ | \\$$ |$$\\    \n";
-	std::cout << "            \\__/     \\__|\\______|\\__|  \\__|\\__|   \n";
+	std::cout << "                         $$\\     $$\\  $$$$$$\\  $$\\   $$\\       \n";
+	std::cout << "                         \\$$\\   $$  |$$  __$$\\ $$ |  $$ |      \n";
+	std::cout << "                          \\$$\\ $$  / $$ /  $$ |$$ |  $$ |      \n";
+	std::cout << "                           \\$$$$  /  $$ |  $$ |$$ |  $$ |      \n";
+	std::cout << "                            \\$$  /   $$ |  $$ |$$ |  $$ |      \n";
+	std::cout << "                             $$ |    $$ |  $$ |$$ |  $$ |      \n";
+	std::cout << "                             $$ |     $$$$$$  |\\$$$$$$  |      \n";
+	std::cout << "                             \\__|     \\______/  \\______/       \n";
+	std::cout << "                          $$\\      $$\\ $$$$$$\\ $$\\   $$\\ $$\\    \n";
+	std::cout << "                          $$ | $\\  $$ |\\_$$  _|$$$\\  $$ |$$ |   \n";
+	std::cout << "                          $$ |$$$\\ $$ |  $$ |  $$$$\\ $$ |$$ |   \n";
+	std::cout << "                          $$ $$ $$\\$$ |  $$ |  $$ $$\\$$ |$$ |   \n";
+	std::cout << "                          $$$$  _$$$$ |  $$ |  $$ \\$$$$ |\\__|   \n";
+	std::cout << "                          $$$  / \\$$$ |  $$ |  $$ |\\$$$ |       \n";
+	std::cout << "                          $$  /   \\$$ |$$$$$$\\ $$ | \\$$ |$$\\    \n";
+	std::cout << "                          \\__/     \\__|\\______|\\__|  \\__|\\__|   \n";
 	ConsoleSetColor(WHITE, BLACK);
 	ConsoleXY((SIZE * 3) / 2, SIZE * 3);
 	std::cout << "(1) To Return.";
@@ -140,7 +146,7 @@ bool sceneScoreboard() {
 	std::cout << " \\______/  \\______/  \\______/ \\__|  \\__|\\________|\\_______/  \\______/ \\__|  \\__|\\__|  \\__|\\_______/ \n";
 	if (!scoreComp(&vectScores))
 	{
-		return false;
+		return true;
 	}
 	
 	ConsoleXY(((SIZE * 3) / 2), (SIZE * 3) - 35);
@@ -177,19 +183,17 @@ bool sceneScoreboard() {
 		switch (key)
 		{
 		case KB_1:
-			return true;
+			return false;
 			break;
 		default:
 			break;
 		}
 	}
-	return true;
+	return false;
 }
 
+
 bool sceneGame(Player *player, Goal *goal, Mapa *map, std::vector <Enemy> *objs_enemy, std::vector <Food> *objs_food, std::vector <Weapon> *objs_weapons) {
-	ConsoleSetColor(WHITE, BLACK);
-	ConsoleXY(0, 0);
-	std::cout << "Genrating Maze...";
 	map->init();
 	goal->init(map, player);
 	if (objs_enemy->size() == SIZE)
@@ -207,7 +211,6 @@ bool sceneGame(Player *player, Goal *goal, Mapa *map, std::vector <Enemy> *objs_
 	objs_enemy->resize(SIZE);
 	objs_food->resize(SIZE);
 	objs_weapons->resize(SIZE);
-
 	for (int i = 0; i < SIZE; i++)
 	{
 		objs_enemy->at(i).init(map, objs_enemy, i);

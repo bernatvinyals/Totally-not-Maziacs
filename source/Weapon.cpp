@@ -82,18 +82,6 @@ void Weapon::render()
 	}
 }
 
-void Weapon::deactivate()
-{
-	_isActive = false;
-	ConsoleSetColor(BLACK, BLACK);
-	ConsoleXY(_position.X, _position.Y);
-}
-
-void Weapon::setCollisionMap(Mapa* objMap)
-{
-	objMap->getMap(_collision);
-}
-
 bool Weapon::isOverlaping()
 {
 	if (_obj_player->getX() == _position.X && _obj_player->getY() == _position.Y)

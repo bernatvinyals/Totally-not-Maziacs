@@ -1,5 +1,4 @@
 #pragma once
-
 #define KB_UP 72
 #define KB_DOWN 80
 #define KB_LEFT 75
@@ -28,5 +27,6 @@ void ConsoleClearCharacter(char character, ConsoleColor ForeColor, ConsoleColor 
 
 void ConsoleWait(unsigned long milisecons);
 void ConsoleWindowSize(int xSize, int ySize);
+void HideConsoleCursor();
 int ConsoleInKey();
 void ChangeTextFontSize(int sizeX, int sizeY);
