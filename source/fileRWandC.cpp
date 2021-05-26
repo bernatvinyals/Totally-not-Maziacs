@@ -43,7 +43,7 @@ bool scoreComp(std::vector <ScoreUser> *ptrVectScores) {
 		{
 			for (int j = 0; j < (int)ptrVectScores->size()-i; j++)
 			{
-				if ((ptrVectScores->at(j)._score, ptrVectScores->at(j+1)._score) > 0 )
+				if ((ptrVectScores->at(j)._score < ptrVectScores->at(j+1)._score))
 				{
 					ScoreUser tempScore = ptrVectScores->at(j);
 					ptrVectScores->at(j) = ptrVectScores->at(j + 1);
